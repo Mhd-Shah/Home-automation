@@ -1,4 +1,4 @@
-# Home-automation 
+# Motion-Controlled-Light 
 In this circuit there is a normal switch that can be controlled through mobile application or browser. 
 When this switch is turned on, the bulb continuously light until we turn off the switch.
 When this switch is turned off, the bulb will turn on if there is any motion in the room.
