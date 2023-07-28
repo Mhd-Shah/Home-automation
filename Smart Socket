@@ -28,10 +28,15 @@ void setup() {
   ArduinoCloud.begin(ArduinoIoTPreferredConnection);
   setDebugMessageLevel(2);
   ArduinoCloud.printDebugInfo();
-  tempSensor.begin();
 }
 
 void loop() {
   ArduinoCloud.update();
  
+}
+void onPlugChange()  {
+  if(plug.isActive()){
+    digitalWrite(39,HIGH);
+  }
+    
 }
