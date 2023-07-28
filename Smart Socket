@@ -6,7 +6,7 @@
 
   The following variables are automatically generated and updated when changes are made to the Thing
 
-  CloudSchedule plug;
+  CloudSchedule plug;// variable for scheduling plug
 
 
   Variables which are marked as READ/WRITE in the Cloud Thing will also have functions
@@ -35,6 +35,7 @@ void loop() {
  
 }
 void onPlugChange()  {
+// if the time reached socket will be active.
   if(plug.isActive()){
     digitalWrite(39,HIGH);
   }
