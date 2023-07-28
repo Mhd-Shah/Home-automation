@@ -1,3 +1,4 @@
+# Temperatur-Controlled-Fan
 An auto switch is provided to turn on the system that automatically adjust the speed of the fan based on the temperature.
 When auto switch is on, the system will automatically adjust the speed of the fan based on temperature.
 The temperature sensor used to measure the temperature is DS18B20.
