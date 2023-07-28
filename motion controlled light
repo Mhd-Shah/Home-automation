@@ -6,11 +6,7 @@
 
   The following variables are automatically generated and updated when changes are made to the Thing
 
-  CloudTemperatureSensor temperature;
-  int fAN;
-  CloudSchedule plug;
-  bool auto_fan;
-  bool light;
+  bool light;// variable to turn on/off the switch
 
   Variables which are marked as READ/WRITE in the Cloud Thing will also have functions
   which are called when their values are changed from the Dashboard.
@@ -18,12 +14,6 @@
 */
 
 #include "thingProperties.h"
-#include <OneWire.h> 
-#include <DallasTemperature.h>  
-const int SENSOR_PIN = 36;
-OneWire oneWire(SENSOR_PIN); 
-DallasTemperature tempSensor(&oneWire); 
-float tempCelsius;
 
 unsigned long t = 0;
 void setup() {
@@ -39,44 +29,11 @@ void setup() {
   ArduinoCloud.begin(ArduinoIoTPreferredConnection);
   setDebugMessageLevel(2);
   ArduinoCloud.printDebugInfo();
-  tempSensor.begin();
 }
 
 void loop() {
   ArduinoCloud.update();
  
-}
-
-void onFANChange()  {
-  if(auto_fan == true){
-    if(fAN == 0){
-    //3 ports used to control fan
-      digitalWrite(15,LOW);
-      digitalWrite(2,LOW);
-      digitalWrite(0,LOW);
-    }
-    else if(fAN == 1){
-      digitalWrite(15,LOW);
-      digitalWrite(2,HIGH);
-      digitalWrite(0,LOW);
-    }
-    else if(fAN == 2){
-      digitalWrite(15,LOW);
-      digitalWrite(2,LOW);
-      digitalWrite(0,HIGH);
-    }
-    else if(fAN == 3){
-      digitalWrite(15,LOW);
-      digitalWrite(2,HIGH);
-      digitalWrite(0,HIGH);
-    }
-    else{
-      digitalWrite(15,HIGH);
-      digitalWrite(2,LOW);
-      digitalWrite(0,LOW);
-    }
-  }
-  
 }
 
 void onLightChange()  {
@@ -98,43 +55,3 @@ void onLightChange()  {
   
 }
 
-void onPlugChange()  {
-  if(plug.isActive()){
-    digitalWrite(39,HIGH);
-  }
-    
-}
-
-void onAutoFanChange()  {
-  if (auto_fan == true){
-    tempSensor.requestTemperatures(); 
-    tempCelsius = tempSensor.getTempCByIndex(0); 
-    if(tempCelsius < 25){
-       digitalWrite(15,LOW);
-       digitalWrite(2,LOW);
-       digitalWrite(0,LOW);
-    }
-    else if(tempCelsius<30){
-       digitalWrite(15,LOW);
-       digitalWrite(2,HIGH);
-       digitalWrite(0,LOW);
-    }
-    else if(tempCelsius<35){
-       digitalWrite(15,LOW);
-       digitalWrite(2,LOW);
-       digitalWrite(0,HIGH);
-    }
-    else if(tempCelsius<40){
-       digitalWrite(15,LOW);
-       digitalWrite(2,HIGH);
-       digitalWrite(0,HIGH);
-    }
-    else{
-      digitalWrite(15,HIGH);
-      digitalWrite(2,LOW);
-      digitalWrite(0,LOW); 
-    
-    }
-  
-  }
-}  
