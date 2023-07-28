@@ -22,7 +22,6 @@ OneWire oneWire(SENSOR_PIN);
 DallasTemperature tempSensor(&oneWire); 
 float tempCelsius;
 
-unsigned long t = 0;
 void setup() {
   // Initialize serial and wait for port to open:
   Serial.begin(9600);
@@ -75,3 +74,36 @@ void onFANChange()  {
   }
   
 }
+void onAutoFanChange()  {
+  if (auto_fan == true){
+    tempSensor.requestTemperatures(); 
+    tempCelsius = tempSensor.getTempCByIndex(0); 
+    if(tempCelsius < 25){
+       digitalWrite(15,LOW);
+       digitalWrite(2,LOW);
+       digitalWrite(0,LOW);
+    }
+    else if(tempCelsius<30){
+       digitalWrite(15,LOW);
+       digitalWrite(2,HIGH);
+       digitalWrite(0,LOW);
+    }
+    else if(tempCelsius<35){
+       digitalWrite(15,LOW);
+       digitalWrite(2,LOW);
+       digitalWrite(0,HIGH);
+    }
+    else if(tempCelsius<40){
+       digitalWrite(15,LOW);
+       digitalWrite(2,HIGH);
+       digitalWrite(0,HIGH);
+    }
+    else{
+      digitalWrite(15,HIGH);
+      digitalWrite(2,LOW);
+      digitalWrite(0,LOW); 
+    
+    }
+  
+  }
+} 
