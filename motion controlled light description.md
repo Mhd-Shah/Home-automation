@@ -6,4 +6,4 @@ The bulb will continue in  the turned on state until the motion stops.
 The motion in the room is detected using a PIR motion sensor and a relay module is used to control the current flow.
 Also there is an external switch that helps to turn off the light completely. 
 It will help to turn off the light in case of necessary.
-see the circuit diagram for for details.
+See the circuit diagram and user interface for for details.
